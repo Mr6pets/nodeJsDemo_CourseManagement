@@ -1,0 +1,2 @@
+# nodeJsDemo_CourseManagement
+这是一个nodejsw为后台前端页面采用bootstrap框架包含登录 验证 增删改查课程的一个练习demo
