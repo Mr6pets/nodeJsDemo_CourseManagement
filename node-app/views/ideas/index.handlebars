@@ -3,6 +3,11 @@
   <h3>{{title}}</h3>
   <p>{{details}}</p>
   <a href="/ideas/edit/{{id}}" class="btn btn-dark btn-block">编辑</a>
+  {{!-- 删除按钮添加 删除不用跳转页面 使用form表单 可以设定我们请求的模式 --}}
+  <form action="/ideas/{{id}}?_method=DELETE" method="post">
+    <input type="hidden" name="method" value="DELETE">
+    <input type="submit" class="btn btn-danger btn-block" value="删除">
+  </form>
 </div>
 {{else}}
 <p>还没有任何课程</p>

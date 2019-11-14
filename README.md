@@ -160,3 +160,18 @@ step6:执行 db.ideas.find()
 
 ~~~
 
+> ​	method-override
+
+在form表单中 提交只有get post 这里nodejs中实现编辑要用put方法 这里通过method-override模块
+
+~~~js
+npm install method-override
+~~~
+
+> ​	[express-session](https://www.cnblogs.com/mingjiatang/p/7495321.html)   [connect-flash](https://www.jianshu.com/p/29607cb427d4)
+
+~~~js
+express-session: 存储需要用到的数据
+~~~
+
+> ​	
