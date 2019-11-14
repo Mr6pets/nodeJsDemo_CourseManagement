@@ -58,6 +58,7 @@ app.get('/ideas/add', (req, res) => {
 })
 // 编辑
 app.get('/ideas/edit/:id', (req, res) => {
+  //获取本地数据库中我们传递过来的数据id的那个值
   res.render("ideas/edit")
 })
 
