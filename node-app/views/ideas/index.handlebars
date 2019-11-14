@@ -1,0 +1,9 @@
+{{#each ideas}}
+<div class="card card-body mb-2">
+  <h3>{{title}}</h3>
+  <p>{{details}}</p>
+  <a href="/ideas/edit/{{id}}" class="btn btn-dark btn-block">编辑</a>
+</div>
+{{else}}
+<p>还没有任何课程</p>
+{{/each}}
