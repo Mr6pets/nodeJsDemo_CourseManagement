@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const methodOverride = require('method-override')
 const session = require('express-session')
 const flash = require('connect-flash');
+const path = require('path')
 // 实例化
 const app = express();
 //载入 routes
@@ -21,6 +22,7 @@ mongoose.connect("mongodb://localhost/node-app")
   .catch(err => {
     console.log(err)
   })
+
 //引入模型
 require("./models/Idea")
 //实例化一个model
@@ -37,16 +39,20 @@ app.set('view engine', 'handlebars');
 var jsonParser = bodyParser.json();
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
+//使用静态文件
+app.use(express.static(path.join(__dirname, "public")));
+
 //method-override中间件
 app.use(methodOverride('_method'));
 
-//session 和 flash middleware 中间件
+//session  中间件
 app.use(session({
   secret: 'secret',//秘钥
   resave: true,
   saveUninitialized: true
 }));
 
+//flash middleware 中间件
 app.use(flash());
 
 //配置全局变量 方便其他页面使用
@@ -65,11 +71,12 @@ app.get('/', (req, res) => {
     title: title
   })
 })
-app.get('/about', (req, res) => {
-  res.render("about")
+app.get('/about', (request, response) => {
+  response.render("about")
 })
 
 //使用暴出来的router 接口
+// app.use(path,callback)中的callback既可以是router对象又可以是函数；
 app.use('/', ideas)
 app.use('/', users)
 

@@ -107,5 +107,5 @@ router.delete("/ideas/:id", (req, res) => {
     })
 })
 
-// 暴露出去 接口地址为router
+// 暴露这个router模块
 module.exports = router;

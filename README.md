@@ -174,4 +174,9 @@ npm install method-override
 express-session: 存储需要用到的数据
 ~~~
 
-> ​	
+> ​	代码抽离中有些不明白的地方
+
+[关于暴露的路由模块的说明](https://blog.csdn.net/u011146511/article/details/80680598)
+
+connect-flash的使用
+
