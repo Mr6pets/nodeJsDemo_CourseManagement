@@ -206,5 +206,34 @@ npm install passport-loca
 
 > ​	打包上传heroku
 
-mlab:
+在本地项目文件夹初始化Git仓库
+
+步骤：
+
+~~~js
+git init（初始化本地仓库）
+
+git add .(上传所有文件)
+
+git commit -am "备注说明"（放置到暂存区 等待上传到远程仓库后者服务器）
+~~~
+
+本地连接heroku步骤：
+
+~~~
+1.下载和操作系统匹配的heroku toolbelt，傻瓜式安装
+2.打开终端terminal
+3.cd到项目文件夹
+4.登录Heroku：
+	heroku login
+	输入Heroku的账户和密码（或者Heroku会跳转到网页直接登录）
+5.连接Heroku
+heroku create
+6.此时网页中Heroku中已经有了一个项目点击进去 点击deplyo 有提示如何进行上传仓库
+传到Heroku仓库：heroku git:remote -a pure-forest-15671
+之后是git init  || git add . || git commit -a -m "..."
+之后就可以 直接git push heroku master
+
+heroku打开网址：heroku open
+~~~
 
