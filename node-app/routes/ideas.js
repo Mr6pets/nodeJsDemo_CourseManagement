@@ -1,6 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require('body-parser');
+
+//引入守卫
+const { ensureAuthenticated } = require("../helpers/auth")
+
+
 //引入模型
 require("../models/Idea")
 //实例化一个model
@@ -14,7 +19,7 @@ var jsonParser = bodyParser.json();
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 // 课程页面
-router.get('/ideas', (req, res) => {
+router.get('/ideas', ensureAuthenticated, (req, res) => {
   //填写页面的拿到的信息已近存储到了本地的mongoose数据库中了。这里的路由是将本地的存储的数据库信息拿出来展示在页面上
   Idea.find({})
     .sort({ data: "desc" })
@@ -26,11 +31,11 @@ router.get('/ideas', (req, res) => {
 
 })
 // 添加页面
-router.get('/ideas/add', (req, res) => {
+router.get('/ideas/add', ensureAuthenticated, (req, res) => {
   res.render("ideas/add")
 })
 // 编辑
-router.get('/ideas/edit/:id', (req, res) => {
+router.get('/ideas/edit/:id', ensureAuthenticated, (req, res) => {
   //获取本地数据库中我们传递过来的数据id的那个值的数据
   //Idea中查找数据结构_id: 是传递过来的这一个值的数据 如果成功了就then方法下去
   Idea.findOne({
@@ -97,7 +102,7 @@ router.put('/ideas/:id', urlencodedParser, (req, res) => {
     })
 })
 //实现删除
-router.delete("/ideas/:id", (req, res) => {
+router.delete("/ideas/:id", ensureAuthenticated, (req, res) => {
   Idea.remove({
     _id: req.params.id
   })

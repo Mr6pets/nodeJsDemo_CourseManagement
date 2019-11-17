@@ -174,9 +174,31 @@ npm install method-override
 express-session: 存储需要用到的数据
 ~~~
 
-> ​	代码抽离中有些不明白的地方
+> ​	###	代码抽离中有些不明白的地方 ###
 
 [关于暴露的路由模块的说明](https://blog.csdn.net/u011146511/article/details/80680598)
 
 connect-flash的使用
+
+> 密码加密模块 bcrypt
+
+~~~~
+npm install bcrypt
+~~~~
+
+~~~js
+// genSalt（saltRounds，function(){}）saltRounds密码强度 6
+//bcrypt.hash(myPlaintextPassword) myPlaintextPassword:加密对象
+bcrypt.genSalt(6, (err, salt) => {
+  bcrypt.hash(newUser.password, salt, (err, hash) => {
+  });
+});
+~~~
+
+> ​	passport实现验证
+
+~~~
+npm install passport
+npm install passport-local
+~~~
 

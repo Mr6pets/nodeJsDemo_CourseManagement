@@ -15,12 +15,8 @@
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a href="/users/login" class="nav-link">登录</a>
-        </li>
-        <li class="nav-item">
-          <a href="/users/register" class="nav-link">注册</a>
-        </li>
+
+        {{# if user}}
         <li class="nav-item dropdown">
           <a href="#" class="nav-link dropdown-toggle " data-toggle="dropdown" id="navbarDropdownMenuLink">想学的课程</a>
           <div class="dropdown-menu">
@@ -28,6 +24,17 @@
             <a href="/ideas/add" class="dropdown-item">添加</a>
           </div>
         </li>
+        <li class="nav-item">
+          <a href="/users/logout" class="nav-link">退出</a>
+        </li>
+        {{else}}
+        <li class="nav-item">
+          <a href="/users/login" class="nav-link">登录</a>
+        </li>
+        <li class="nav-item">
+          <a href="/users/register" class="nav-link">注册</a>
+        </li>
+        {{/if}}
       </ul>
     </div>
   </div>

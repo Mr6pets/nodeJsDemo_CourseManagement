@@ -7,12 +7,17 @@ const methodOverride = require('method-override')
 const session = require('express-session')
 const flash = require('connect-flash');
 const path = require('path')
+const passport = require("passport");
+
 // 实例化
 const app = express();
 //载入 routes
 const ideas = require('./routes/ideas');
 const users = require('./routes/users');
 
+//引入的文件需要传递一个参数 传递一个我们引入的passport
+//？？？这里还是不太明白什么意思
+require("./config/passport")(passport);
 
 //链接本地的mogoose地址
 mongoose.connect("mongodb://localhost/node-app")
@@ -52,6 +57,10 @@ app.use(session({
   saveUninitialized: true
 }));
 
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 //flash middleware 中间件
 app.use(flash());
 
@@ -59,7 +68,10 @@ app.use(flash());
 // 将flash中存入的变量存入res.locals变量中，假如我要在网站中使用flash中存的error和success变量，加可以把它们传入locals变量中，这样所有的模板都可以拿到这个变量。
 app.use((req, res, next) => {
   res.locals.success_msg = req.flash('success_msg');
-  res.locals.error = req.flash('error_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.error = req.flash('error');
+  //如果在密码验证的时候 验证通过done函数会有返回的user信息 这里全局变量一个user
+  res.locals.user = req.user || null
   next();
 })
 
