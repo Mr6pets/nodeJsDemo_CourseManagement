@@ -199,6 +199,12 @@ bcrypt.genSalt(6, (err, salt) => {
 
 ~~~
 npm install passport
-npm install passport-local
+npm install passport-loca
 ~~~
+
+
+
+> ​	打包上传heroku
+
+mlab:
 

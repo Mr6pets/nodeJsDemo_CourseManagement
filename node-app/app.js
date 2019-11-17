@@ -15,12 +15,15 @@ const app = express();
 const ideas = require('./routes/ideas');
 const users = require('./routes/users');
 
+//引入数据库配置地址
+const db = require("./config/datebase");
+
 //引入的文件需要传递一个参数 传递一个我们引入的passport
 //？？？这里还是不太明白什么意思
 require("./config/passport")(passport);
 
 //链接本地的mogoose地址
-mongoose.connect("mongodb://localhost/node-app")
+mongoose.connect(db.mongoURL)
   .then(() => {
     console.log("mongodb is working")
   })
@@ -95,7 +98,7 @@ app.use('/', users)
 
 
 // 设置端口号
-const port = 5000;
+const port = process.env.PORT || 5000;
 // 设置监听
 app.listen(port, () => {
   console.log(`server is starting on ${port}`);
