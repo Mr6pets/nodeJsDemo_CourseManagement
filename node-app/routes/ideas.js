@@ -21,7 +21,7 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 // 课程页面
 router.get('/ideas', ensureAuthenticated, (req, res) => {
   //填写页面的拿到的信息已近存储到了本地的mongoose数据库中了。这里的路由是将本地的存储的数据库信息拿出来展示在页面上
-  Idea.find({})
+  Idea.find({ user: req.user.id })//这里就是找到前端指定的那个用户输入的信息展示
     .sort({ data: "desc" })
     .then(ideas => {
       res.render("ideas/index", {
@@ -42,6 +42,11 @@ router.get('/ideas/edit/:id', ensureAuthenticated, (req, res) => {
     _id: req.params.id
   })
     .then((idea) => {
+      //判断表中的用户是否是进入的用户
+      if (idea.user != req.user.id) {
+        req.flash("error_msg", "非法操作");
+        res.redirect("/ideas");
+      }
       res.render("ideas/edit", {
         idea: idea
       })
@@ -72,7 +77,9 @@ router.post('/ideas', urlencodedParser, (req, res) => {
     //前台符合要求 执行这里的代码 就是将拿到的数据存储在本地的mongoose数据库中
     const newUser = {
       title: req.body.title,
-      details: req.body.details
+      details: req.body.details,
+      //添加一个具有唯一标识的user
+      user: req.user.id
     }
     new Idea(newUser)
       .save()
